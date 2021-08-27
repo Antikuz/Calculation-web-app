@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Генерация запроса к серверам</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<form action="/calculation" method="post" class="contact_form">
+    <ul>
+        <li>
+        <h2>Введите два числа для запроса</h2>
+        </li>
+        <li>
+            <label for="quantity">Первое число: </label>
+            <input type="number" name="number_one" required>
+        </li>
+        <li>
+            <label for="quantity">Второе число: </label>
+            <input type="number" name="number_two" required>
+        </li>
+        <li>
+            <button class="submit" type="submit">Посчитать</button>
+        </li>
+    </ul>
+</form>
+</body>
+</html>
