@@ -1,0 +1,40 @@
+version: "3.9"
+   
+services:
+  front_app:
+    build: ./front_app/
+    restart: always
+    networks:
+      - front_net
+      - back_net
+    ports:
+      - "8000:80"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+  add_app:
+    build: ./add_app/
+    restart: always
+    networks:
+      - back_net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+  multi_app:
+    build: ./multi_app/
+    restart: always
+    networks:
+      - back_net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+
+networks:
+  front_net:
+  back_net:
