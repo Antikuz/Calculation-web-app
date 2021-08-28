@@ -1,7 +1,40 @@
-FROM python:3
+FROM debian:latest as builder
 
-WORKDIR /app
+# Install requirements for python
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install --no-install-recommends -y \
+        python3-dev \
+        python3-pip 
+
+COPY ./requirements.txt .
+RUN pip --no-cache-dir install -r requirements.txt
+
+    
+FROM debian:latest
+
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install --no-install-recommends -y \
+        apache2 \
+        libapache2-mod-wsgi-py3 \
+    && apt-get clean \
+    && apt-get autoremove \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy python requirements from builder
+COPY --from=builder /usr/local /usr/local
+
+COPY ./front_app.conf /etc/apache2/sites-available/front_app.conf
+
+RUN a2dissite 000-default.conf \
+ && a2ensite front_app
+
+# link apache config to docker logs
+RUN ln -sf /proc/self/fd/1 /var/log/apache2/access.log && \
+    ln -sf /proc/self/fd/1 /var/log/apache2/error.log
+
+WORKDIR /var/www/front_app
 COPY . .
-RUN pip3 install -r requirements.txt
 
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=80"]
+CMD  /usr/sbin/apache2ctl -D FOREGROUND
