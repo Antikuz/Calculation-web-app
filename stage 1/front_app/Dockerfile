@@ -25,16 +25,16 @@ RUN apt-get update \
 # Copy python requirements from builder
 COPY --from=builder /usr/local /usr/local
 
-COPY ./front_app.conf /etc/apache2/sites-available/front_app.conf
+COPY ./app.conf /etc/apache2/sites-available/app.conf
 
 RUN a2dissite 000-default.conf \
- && a2ensite front_app
+ && a2ensite app
 
 # link apache config to docker logs
 RUN ln -sf /proc/self/fd/1 /var/log/apache2/access.log && \
     ln -sf /proc/self/fd/1 /var/log/apache2/error.log
 
-WORKDIR /var/www/front_app
+WORKDIR /var/www/app
 COPY . .
 
 CMD  /usr/sbin/apache2ctl -D FOREGROUND
