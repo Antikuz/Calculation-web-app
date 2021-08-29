@@ -7,6 +7,7 @@ RUN apt-get update \
  && apt-get install --no-install-recommends -y \
     openssh-server \
     sudo \
+    python3-apt\
  && apt-get clean \
  && apt-get autoremove \
  && rm -rf /var/lib/apt/lists/*
