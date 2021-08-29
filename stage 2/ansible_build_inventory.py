@@ -25,6 +25,6 @@ with open('inventory', 'w', encoding='utf8') as fh:
     for service in hosts:
         fh.write(f'[{service}]\n')
         for host in hosts[service]:
-            for ip in hosts[service][host]['ip']:
-                fh.write(f'{ip}\n')
+            ip = hosts[service][host]['ip'][0]
+            fh.write(f'{ip}\n')
         fh.write('\n')
