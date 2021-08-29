@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ответ серверов</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<form action="/calculation" method="post" class="contact_form">
+    <ul>
+        <li>
+        <h2><font color="#68b12f">Ответ на запрос успешно получен</font></h2>
+        </li>
+        <li>
+            <label for="name">Имя сервера: </label>
+            <input id="name" type="text" name="name" value="{{ add_hostname }}" readonly>
+            <label for="objects">Сложение: </label>
+            <input type="text" name="objects" value="{{ add_result }}" readonly>
+        </li>
+        <li>
+            <label for="name">Имя сервера: </label>
+            <input id="name" type="text" name="name" value="{{ multi_hostname }}" readonly>
+            <label for="objects">Умножение: </label>
+            <input type="text" name="objects" value="{{ multi_result }}" readonly>
+        </li>
+    </ul>
+</form>
+</body>
+</html>
