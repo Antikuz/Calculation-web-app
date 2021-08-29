@@ -1,5 +1,6 @@
 - name: Configuring containers
   hosts: all
+  gather_facts: False
   tasks:
   - name: Update all packages
     apt:
