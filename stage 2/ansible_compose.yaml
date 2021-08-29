@@ -12,8 +12,6 @@
     docker_compose:
       project_src: ./
     register: result
-  - debug:
-      var: result
   - name: Run script to build inventory
     script: "'{{ playbook_dir }}'/ansible_build_inventory.py '{{ result | to_json }}'"
     register: result
