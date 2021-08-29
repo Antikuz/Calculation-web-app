@@ -13,7 +13,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -ms /bin/bash $USERNAME \
- && usermod -aG sudo $USERNAME \
+ && echo "$USERNAME ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USERNAME \
  && touch /var/log/auth.log
 
 USER $USERNAME
@@ -21,4 +21,4 @@ USER $USERNAME
 RUN mkdir /home/$USERNAME/.ssh
 COPY ./keys/id_rsa.pub /home/$USERNAME/.ssh/authorized_keys
 
-CMD  tail -f /var/log/auth.log
+CMD sudo service ssh start && tail -f /var/log/auth.log
