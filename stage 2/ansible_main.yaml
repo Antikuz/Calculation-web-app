@@ -1,0 +1,4 @@
+- name: Import ansible_compose.yaml
+  import_playbook: ansible_compose.yaml
+- name: Import ansible_containers.yaml
+  import_playbook: ansible_containers.yaml

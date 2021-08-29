@@ -1,0 +1,41 @@
+- name: Configuring containers
+  hosts: all
+  tasks:
+  - name: Update all packages
+    apt:
+      name: "*"
+      state: latest
+  - name: Install packages
+    apt:
+      name:
+      - python3-pip
+      - apache2
+      - libapache2-mod-wsgi-py3
+      - curl
+      state: latest
+      install_recommends: no
+  - name: Start apache service
+    service:
+      name: apache2
+      state: started
+      enabled: yes
+  - name: copy files
+    copy:
+      src: ./{{ app }}
+      dest: /var/www/
+      mode: 0744
+      owner: www-data
+      group: www-data
+  - name: Install app python requirements
+    pip: 
+      requirements: /var/www/{{ app }}/requirements.txt
+  - name: Generate app apache config
+    template:
+      src: ./templates/apache_conf.j2
+      dest: /etc/apache2/sites-available/app.conf
+  - name: Apache disable default and enable app site
+    shell: a2dissite 000-default.conf && a2ensite app
+  - name: Restart apache service
+    service:
+      name: apache2
+      state: restarted

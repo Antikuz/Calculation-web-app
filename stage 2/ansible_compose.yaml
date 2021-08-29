@@ -1,0 +1,21 @@
+- name: Run docker-compose and build inventory
+  become: False
+  hosts: localhost
+  vars:
+    ansible_python_interpreter: /bin/python3
+  tasks:
+  - name: Stop docker-compose containers if exists
+    docker_compose:
+      project_src: ./
+      state: absent
+  - name: Run docker-compose and get info
+    docker_compose:
+      project_src: ./
+    register: result
+  - debug:
+      var: result
+  - name: Run script to build inventory
+    script: "'{{ playbook_dir }}'/ansible_build_inventory.py '{{ result | to_json }}'"
+    register: result
+  - meta: refresh_inventory
+
