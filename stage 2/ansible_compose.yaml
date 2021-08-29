@@ -11,6 +11,7 @@
   - name: Run docker-compose and get info
     docker_compose:
       project_src: ./
+      build: yes
     register: result
   - name: Run script to build inventory
     script: "'{{ playbook_dir }}'/ansible_build_inventory.py '{{ result | to_json }}'"
