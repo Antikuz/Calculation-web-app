@@ -20,5 +20,7 @@ USER $USERNAME
 
 RUN mkdir /home/$USERNAME/.ssh
 COPY ./keys/id_rsa.pub /home/$USERNAME/.ssh/authorized_keys
+RUN sudo chown -R $USERNAME:$USERNAME /home/$USERNAME/.ssh/ && \
+    sudo chmod 600 /home/$USERNAME/.ssh/authorized_keys
 
 CMD sudo service ssh start && tail -f /var/log/auth.log
