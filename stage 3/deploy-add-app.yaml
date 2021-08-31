@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calc-add-app
+  labels:
+    app: add-app-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: add-app
+  template:
+    metadata:
+      labels:
+        app: add-app
+    spec:
+      containers:
+      - name: add-app
+        image: antikuz/calc-add-app:latest
+        ports:
+        - containerPort: 80
