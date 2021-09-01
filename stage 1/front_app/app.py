@@ -49,8 +49,14 @@ def status():
 
 @app.route("/load", methods= ['GET'])
 def load():
-    requests.get('http://add-app/load')
-    requests.get('http://multi-app/load')
+    try:
+        requests.get("http://add-app/load",timeout=0.0000000001)
+    except: 
+        pass
+    try:
+        requests.get("http://multi-app/load",timeout=0.0000000001)
+    except: 
+        pass
     return "Load enabled"
 
 
