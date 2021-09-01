@@ -14,7 +14,7 @@ services:
       interval: 10s
       timeout: 10s
       retries: 3
-  add_app:
+  add-app:
     build: ./add_app/
     restart: always
     networks:
@@ -24,7 +24,7 @@ services:
       interval: 10s
       timeout: 10s
       retries: 3
-  multi_app:
+  multi-app:
     build: ./multi_app/
     restart: always
     networks:
