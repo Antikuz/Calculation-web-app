@@ -12,6 +12,8 @@
         <li>
         <h2><font color="#68b12f">Ответ на запрос успешно получен</font></h2>
         </li>
+        <input type="text" name="number_one" value="{{ number_one }}" readonly hidden>
+        <input type="text" name="number_two" value="{{ number_two }}" readonly hidden>
         <li>
             <label for="name">Имя сервера: </label>
             <input id="name" type="text" name="name" value="{{ add_hostname }}" readonly>
@@ -23,6 +25,9 @@
             <input id="name" type="text" name="name" value="{{ multi_hostname }}" readonly>
             <label for="objects">Умножение: </label>
             <input type="text" name="objects" value="{{ multi_result }}" readonly>
+        </li>
+        <li>
+            <button class="submit" type="submit">Повторить</button>
         </li>
     </ul>
 </form>
