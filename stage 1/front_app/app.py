@@ -43,5 +43,12 @@ def status():
     except:
         return status.text
 
+@app.route("/load", methods= ['GET'])
+def status():
+    requests.get('http://add-app/load')
+    requests.get('http://multi-app/load')
+    return "Load enabled"
+
+
 if __name__ == '__main__':
    app.run(port=8080)
