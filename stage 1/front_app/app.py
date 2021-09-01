@@ -13,12 +13,12 @@ def calculation():
     number_one, number_two = request.form.values()
     
     add_response = requests.get(
-        f'http://add_app/?number_one={number_one}&number_two={number_two}'
+        f'http://add-app/?number_one={number_one}&number_two={number_two}'
     )
     add_response = json.loads(add_response.content)
 
     multi_response = requests.get(
-        f'http://multi_app/?number_one={number_one}&number_two={number_two}'
+        f'http://multi-app/?number_one={number_one}&number_two={number_two}'
     )
     multi_response = json.loads(multi_response.content)
 
