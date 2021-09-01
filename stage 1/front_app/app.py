@@ -10,7 +10,9 @@ def index():
 
 @app.route("/calculation", methods = ['POST', 'GET'])
 def calculation():
-    number_one, number_two = request.form.values()
+    form_values = request.form
+    number_one = form_values['number_one'] 
+    number_two = form_values['number_two'] 
     
     add_response = requests.get(
         f'http://add-app/?number_one={number_one}&number_two={number_two}'
@@ -23,6 +25,8 @@ def calculation():
     multi_response = json.loads(multi_response.content)
 
     context = {
+        'number_one': number_one,
+        'number_two': number_two,
         'add_hostname': add_response['hostname'],
         'add_result': add_response['result'],
         'multi_hostname': multi_response['hostname'],
