@@ -44,7 +44,7 @@ def status():
         return status.text
 
 @app.route("/load", methods= ['GET'])
-def status():
+def load():
     requests.get('http://add-app/load')
     requests.get('http://multi-app/load')
     return "Load enabled"
