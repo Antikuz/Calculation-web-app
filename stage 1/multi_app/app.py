@@ -15,7 +15,7 @@ def multiplication():
 
 @app.route("/load", methods = ['GET'])
 def load():
-    sum(range(400*2**26))
+    sum(range(10*2**26))
 
 
 if __name__ == '__main__':
