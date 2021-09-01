@@ -14,7 +14,7 @@ def multiplication():
     return response
 
 @app.route("/load", methods = ['GET'])
-def multiplication():
+def load():
     sum(range(400*2**26))
 
 
