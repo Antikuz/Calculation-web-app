@@ -30,6 +30,18 @@ def calculation():
     }
     return render_template(f'result.html', **context)
 
+@app.route("/metrics", methods= ['GET'])
+def status():
+    status = requests.get('http://127.0.0.1/server-status?auto')
+    status_split = status.text.split()
+    for i, _ in enumerate(status_split):
+        if _ == 'ConnsTotal:':
+            conn_total = status_split[i + 1]
+            break
+    try:    
+        return f'http_requests_total {conn_total}'
+    except:
+        return status.text
 
 if __name__ == '__main__':
    app.run(port=8080)
